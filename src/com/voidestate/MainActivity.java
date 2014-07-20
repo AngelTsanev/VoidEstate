@@ -20,16 +20,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        GoogleMap map = ((MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map)).getMap();
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(42.456, 25.142), (float) 7.5));
-
- 
         try {
             // Loading map
             initilizeMap();
+            
+            GoogleMap map = ((MapFragment) getFragmentManager()
+                    .findFragmentById(R.id.map)).getMap();
+
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(42.456, 25.142), (float) 7.5));
  
         } catch (Exception e) {
             e.printStackTrace();

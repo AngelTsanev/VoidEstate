@@ -481,8 +481,10 @@ int string common_signin_button_text 0x7f06001d
 int string common_signin_button_text_long 0x7f06001e
 int string hello_world 0x7f06002e
 int string wallet_buy_button_place_holder 0x7f06001f
-int style AppBaseTheme 0x7f050090
-int style AppTheme 0x7f050091
+int style AppBaseTheme 0x7f050092
+int style AppTheme 0x7f050093
+int style MyActionBar 0x7f050091
+int style MyTheme 0x7f050090
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f050068
 int style TextAppearance_AppCompat_Base_SearchResult 0x7f050072
 int style TextAppearance_AppCompat_Base_SearchResult_Subtitle 0x7f050074

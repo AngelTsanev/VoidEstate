@@ -1764,11 +1764,13 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050090;
+        public static final int AppBaseTheme=0x7f050092;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050091;
+        public static final int AppTheme=0x7f050093;
+        public static final int MyActionBar=0x7f050091;
+        public static final int MyTheme=0x7f050090;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f050068;
