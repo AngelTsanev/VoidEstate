@@ -1500,8 +1500,8 @@ containing a value of this type.
         public static final int ifRoom=0x7f08001d;
         public static final int image=0x7f080039;
         public static final int listMode=0x7f080014;
+        public static final int listView1=0x7f08004e;
         public static final int list_item=0x7f08003b;
-        public static final int map=0x7f08004e;
         public static final int match_parent=0x7f08000c;
         public static final int middle=0x7f080024;
         public static final int monochrome=0x7f080013;
