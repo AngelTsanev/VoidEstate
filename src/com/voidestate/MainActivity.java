@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,10 +17,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +35,7 @@ public class MainActivity extends Activity {
     // Google Map
     private GoogleMap googleMap;
     
+    private House house = new House();
     private String jsonResult;
     private String url = "http://192.168.0.105/sqlrequest/myFile.php";
     private ListView listView;
@@ -89,7 +92,6 @@ public class MainActivity extends Activity {
       HttpClient httpclient = new DefaultHttpClient();
       HttpPost rate = new HttpPost(params[0]);
       try {
-    	  
        HttpResponse response = httpclient.execute(rate);
        jsonResult = inputStreamToString(
          response.getEntity().getContent()).toString();
@@ -136,40 +138,82 @@ public class MainActivity extends Activity {
     
     // build hash set for list view
     public void ListDrwaer() {
-     List<Map<String, String>> employeeList = new ArrayList<Map<String, String>>();
+     final List<House> houseList = new ArrayList<House>();
+     List<String> houseInfo = new ArrayList<String>();
     
-     try {
+    try {
       JSONObject jsonResponse = new JSONObject(jsonResult);
       JSONArray jsonMainNode = jsonResponse.optJSONArray("houses");
     
       for (int i = 0; i < jsonMainNode.length(); i++) {
        JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-       String key_id = jsonChildNode.optString("key_id");
-       String province = jsonChildNode.optString("province_name");
-       String price = jsonChildNode.optString("price");
-       String description = jsonChildNode.optString("description");
        
-       String outPut = key_id + "." + province + " " + price + "description :" + description;
+       house.setId(jsonChildNode.optInt("key_id"));
+       house.setLat(jsonChildNode.optDouble("latitude"));
+       house.setLon(jsonChildNode.optDouble("longitude"));
+       house.setAddress(jsonChildNode.optString("address"));
+       house.setProvinceName(jsonChildNode.optString("province_name"));
+       house.setCity(jsonChildNode.optString("city"));
+       house.setNearestBigCity(jsonChildNode.optString("nearest_city"));
+       house.setDistanceToNearestBigCity(jsonChildNode.optDouble("distance_to_near_city"));
+       house.setDistanceToTheSea(jsonChildNode.optDouble("distance_to_sea"));
+       house.setNumberOfBedrooms(jsonChildNode.optInt("bedrooms"));
+       house.setNumberOfBathrooms(jsonChildNode.optInt("bathrooms"));
+       house.setFloors(jsonChildNode.optInt("floors"));
+       house.setYard(jsonChildNode.optBoolean("yard"));
+       house.setSize(jsonChildNode.optDouble("size"));
+       house.setDescription(jsonChildNode.optString("description"));
+       house.setPrice(jsonChildNode.optDouble("price"));
        
-       employeeList.add(createEmployee("employees", outPut));
+       String outPut = house.getId() + "." + house.getProvinceName() + " "
+    		   		 + house.getPrice() + "description :" + house.getDescription();
+       
+       houseInfo.add(outPut);
+       houseList.add(house);
       }
      } catch (JSONException e) {
       Toast.makeText(getApplicationContext(), "Error" + e.toString(),
         Toast.LENGTH_SHORT).show();
      }
     
-     SimpleAdapter simpleAdapter = new SimpleAdapter(this, employeeList,
-       android.R.layout.simple_list_item_1,
-       new String[] { "employees" }, new int[] { android.R.id.text1 });
-     listView.setAdapter(simpleAdapter);
+    int houseListSize = houseInfo.size();
+    String[] houseListInfo = new String[houseListSize];
+    
+    for(int i = 0; i < houseListSize; i++) {
+    	houseListInfo[i] = houseInfo.get(i);
     }
     
-    private HashMap<String, String> createEmployee(String name, String number) {
-     HashMap<String, String> employeeNameNo = new HashMap<String, String>();
-     employeeNameNo.put(name, number);
-     return employeeNameNo;
-    }
-    
+     listView = (ListView) findViewById(R.id.listView1);
+     ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, houseListInfo);
+     listView.setAdapter(mAdapter);
+     
+     listView.setOnItemClickListener(new OnItemClickListener() {
+    	 @Override
+    	 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    		 Intent intent = new Intent (MainActivity.this, SingleHouse.class);
+    		 intent.putExtra("key_id", houseList.get(position).getId());
+    		 intent.putExtra("latitude", houseList.get(position).getLat());
+    		 intent.putExtra("longitude",houseList.get(position).getLon());
+    		 intent.putExtra("address", houseList.get(position).getAddress());
+    		 intent.putExtra("province_name",houseList.get(position).getProvinceName());
+    		 intent.putExtra("city", houseList.get(position).getCity());
+    		 intent.putExtra("nearest_city", houseList.get(position).getNearestBigCity());
+    		 intent.putExtra("distance_to_near_city", houseList.get(position).getDistanceToNearestBigCity());
+    		 intent.putExtra("distance_to_sea", houseList.get(position).getDistanceToTheSea());
+    		 intent.putExtra("bedrooms", houseList.get(position).getNumberOfBedrooms());
+    		 intent.putExtra("bathrooms", houseList.get(position).getNumberOfBathrooms());
+    		 intent.putExtra("floors", houseList.get(position).getFloors());
+    		 intent.putExtra("yard", houseList.get(position).getYard());
+    		 intent.putExtra("size", houseList.get(position).getSize());
+    		 intent.putExtra("description", houseList.get(position).getDescription());
+    		 intent.putExtra("price", houseList.get(position).getPrice());
+    		 
+    		 startActivity(intent);
+    		 finish();
+    		 
+    	 }
+     });
+    }    
     
     @Override
     protected void onResume() {

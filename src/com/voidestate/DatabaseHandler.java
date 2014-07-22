@@ -109,7 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	            cursor.getString(4), cursor.getString(5), cursor.getString(6), Double.parseDouble(cursor.getString(7)),
 				Double.parseDouble(cursor.getString(8)), Integer.parseInt(cursor.getString(9)),
 				Integer.parseInt(cursor.getString(10)), Integer.parseInt(cursor.getString(11)),
-				Integer.parseInt(cursor.getString(12)), Double.parseDouble(cursor.getString(13)),
+				Boolean.parseBoolean(cursor.getString(12)), Double.parseDouble(cursor.getString(13)),
 				cursor.getString(14), Double.parseDouble(cursor.getString(15)));
 	    // return house
 	    return house;
@@ -140,7 +140,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	            house.setNumberOfBedrooms(Integer.parseInt(cursor.getString(9)));
 	            house.setNumberOfBathrooms(Integer.parseInt(cursor.getString(10)));
 	            house.setFloors(Integer.parseInt(cursor.getString(11)));
-	            house.setYard(Integer.parseInt(cursor.getString(12)));
+	            house.setYard(Boolean.parseBoolean(cursor.getString(12)));
 	            house.setSize(Double.parseDouble(cursor.getString(13)));
 	            house.setDescription(cursor.getString(14));
 	            house.setPrice(Double.parseDouble(cursor.getString(15)));
