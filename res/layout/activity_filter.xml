@@ -1,0 +1,202 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.voidestate.FilterActivity" >
+    
+    <View
+        android:id="@+id/fakeView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/price_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@id/fakeView"
+        android:layout_below="@+id/textprice"
+        android:ems="10"
+        android:hint="min price"
+        android:textSize="15dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/price_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/fakeView"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textprice"
+        android:ems="10"
+        android:hint="max price"
+        android:textSize="15dp" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/number_bedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/price_to"
+        android:layout_alignRight="@+id/price_to"
+        android:ems="10"
+        android:hint="number"
+        android:inputType="number"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/Radius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/distance"
+        android:layout_below="@+id/distance"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/textprice"
+        android:ems="10"
+        android:hint="distance"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/Town_or_City"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Radius"
+        android:layout_alignBottom="@+id/Radius"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignRight="@+id/number_bedrooms"
+        android:ems="10"
+        android:hint="name of Town"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/Town_or_City"
+        android:layout_alignRight="@+id/Town_or_City"
+        android:ems="10"
+        android:hint="area"
+        android:textSize="15dp" />
+    
+ 
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:textSize="13dp"
+        android:layout_marginTop="20dp" >
+
+        <RadioButton
+            android:id="@+id/radio0"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Price(low-high)"
+            android:textSize="13dp" />
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price(high-low)"
+            android:textSize="13dp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/radioGroup1"
+        android:background="#FFFFFF"
+        android:onClick="goToListOfHouses"
+        android:text="Search"
+        android:textColor="#008B45"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/price_from"
+        android:layout_below="@+id/price_from"
+        android:layout_marginTop="25dp"
+        android:text="Bedrooms:"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/number_bedrooms"
+        android:layout_marginTop="25dp"
+        android:text="Radius(km.):"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Radius"
+        android:layout_below="@+id/Radius"
+        android:layout_marginTop="28dp"
+        android:text="Land Size(sq.m.):"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/distance"
+        android:layout_alignBottom="@+id/distance"
+        android:layout_alignLeft="@+id/number_bedrooms"
+        android:text="Town or City:"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/textprice"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignTop="@+id/radioGroup1"
+        android:text="Sort Result:"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+  
+  
+</RelativeLayout>

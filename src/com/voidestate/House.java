@@ -18,7 +18,7 @@ public class House {
     private double size;
     private String description;
     private double price;
-    //private String[] pictures;
+    private String pictures;
 	
 	public House() {
 
@@ -26,7 +26,7 @@ public class House {
 
 	public House(int _id, double _lat, double _lon, String _address, String _province_name, String _city, String _nearest_big_city,
 				 double _distance_to_nearest_big_city, double _distance_to_the_sea, int _number_of_bedrooms, int _number_of_bathrooms,
-				 int _floors, boolean _yard, double _size, String _description, double _price/*, String[] _pictures*/) {
+				 int _floors, boolean _yard, double _size, String _description, double _price, String _pictures) {
 		this.id = _id;
 		this.lat = _lat;
 		this.lon = _lon;
@@ -43,12 +43,12 @@ public class House {
 		this.size = _size;
 		this.description = _description;
 		this.price = _price;
-		//this.pictures = _pictures;
+		this.pictures = _pictures;
 	}
 	
 	public House(double _lat, double _lon, String _address, String _province_name, String _city, String _nearest_big_city,
 				 double _distance_to_nearest_big_city, double _distance_to_the_sea, int _number_of_bedrooms, int _number_of_bathrooms,
-				 int _floors, boolean _yard, double _size, String _description, double _price/*, String[] _pictures*/) {
+				 int _floors, boolean _yard, double _size, String _description, double _price, String _pictures) {
 		this.lat = _lat;
 		this.lon = _lon;
 		this.address = _address;
@@ -64,7 +64,7 @@ public class House {
 		this.size = _size;
 		this.description = _description;
 		this.price = _price;
-		//this.pictures = _pictures;
+		this.pictures = _pictures;
 	}
 
 	public int getId() {
@@ -195,12 +195,12 @@ public class House {
     	this.price = _price;
     }
     
-    /*public String[] getPictures() {
+    public String getPictures() {
     	return this.pictures;
     }
     
-    public void setPictures(String[] _pictures) {
+    public void setPictures(String _pictures) {
     	this.pictures = _pictures;
-    }*/
+    }
 }
 
