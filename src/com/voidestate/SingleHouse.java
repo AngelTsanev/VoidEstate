@@ -21,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SingleHouse extends Activity {
-	 ImageView selectedImage; 
+	 ImageView selectedImage;
+	 private double lon;
+	 private double lat;
     
 	@SuppressLint("UseValueOf") @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +34,11 @@ public class SingleHouse extends Activity {
 		House house = new House();
 		
 		house.setId(intent.getIntExtra("key_id", 0));
+		
 	    house.setLat(intent.getDoubleExtra("latitude", 0));
+	    lat = intent.getDoubleExtra("latitude", 0);
 	    house.setLon(intent.getDoubleExtra("longitude", 0));
+	    lon = intent.getDoubleExtra("longitude", 0);
 	    house.setAddress(intent.getStringExtra("address"));
 	    house.setProvinceName(intent.getStringExtra("province_name"));
 	    house.setCity(intent.getStringExtra("city"));
@@ -160,5 +165,13 @@ public class SingleHouse extends Activity {
 	 		Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
 	 		emailIntent.setData(Uri.parse("mailto:example@bla.com"));
 	 		startActivity(emailIntent);
+	 	}
+	 	
+	 	public void showOnMap(View view){
+	 		Intent intent = new Intent(SingleHouse.this, LocateSingleHouse.class);
+			intent.putExtra("lon", lon);
+			intent.putExtra("lat", lat);
+			startActivity(intent);
+	 		
 	 	}
 }

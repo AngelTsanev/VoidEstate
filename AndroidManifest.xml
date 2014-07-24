@@ -75,6 +75,11 @@
             android:label="@string/title_activity_list_of_houses"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".LocateSingleHouse"
+            android:label="@string/title_locate_single_house"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

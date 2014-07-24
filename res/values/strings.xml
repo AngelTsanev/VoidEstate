@@ -7,6 +7,7 @@
     <string name="title_activity_single_house">SingleHouse</string>
     <string name="title_activity_filter">Filter</string>
     <string name="title_activity_list_of_houses">Houses list</string>
+    <string name="title_locate_single_house">Show on map</string>
     <string name="textprice">Price range(£):</string>
     <string name="search">Search</string>
 

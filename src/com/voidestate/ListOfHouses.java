@@ -32,7 +32,7 @@ public class ListOfHouses extends Activity {
     
     private House house = new House();
     private String jsonResult;
-    private String url = "http://46.238.17.97:8000/sqlrequest/myFile.php";
+    private String url;
     private ListView listView;
  
     @Override
@@ -40,6 +40,9 @@ public class ListOfHouses extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_houses); 
         
+        Intent intent = getIntent();
+        url = intent.getStringExtra("url");
+
         listView = (ListView) findViewById(R.id.listView1);
         accessWebService();
     }
@@ -124,11 +127,13 @@ public class ListOfHouses extends Activity {
        house.setDescription(jsonChildNode.optString("description"));
        house.setPrice(jsonChildNode.optDouble("price"));
        
-       String outPut = house.getId() + "." + house.getProvinceName() + " "
-     + house.getPrice() + "description :" + house.getDescription();
+       String outPut = house.getId() + ". " + house.getProvinceName() + " "
+     + house.getPrice() + "description : " + house.getDescription();
        
        houseInfo.add(outPut);
-       houseList.add(house);
+       houseList.add(new House(house.getId(), house.getLat(), house.getLon(), house.getAddress(), house.getProvinceName(),house.getCity(), house.getNearestBigCity(),
+				 house.getDistanceToNearestBigCity(), house.getDistanceToTheSea(), house.getNumberOfBedrooms(), house.getNumberOfBathrooms(),
+				 house.getFloors(), house.getYard(), house.getSize(), house.getDescription(), house.getPrice(), house.getPictures()));
       }
      } catch (JSONException e) {
       Toast.makeText(getApplicationContext(), "Error" + e.toString(),
@@ -168,7 +173,6 @@ public class ListOfHouses extends Activity {
      intent.putExtra("price", houseList.get(position).getPrice());
     
      startActivity(intent);
-     finish();
     
      }
      });
